@@ -113,3 +113,11 @@ if submit2:
         st.write(response)
     else:
         st.write("Please upload the Resume")
+
+import subprocess
+
+try:
+    result = subprocess.run(["pdfinfo", "-v"], capture_output=True, text=True, check=True)
+    print(result.stdout)
+except FileNotFoundError:
+    print("pdfinfo is not in PATH or not accessible.")
