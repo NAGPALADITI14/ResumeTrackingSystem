@@ -1,9 +1,7 @@
 import base64
 import io
 from dotenv import load_dotenv
-
 load_dotenv()
-
 import streamlit as st
 import os
 from  PIL import Image
@@ -21,13 +19,10 @@ def input_pdf_text(uploaded_file):
     ## convert the pdf to image
     if uploaded_file is not None:
         images = pdf2image.convert_from_bytes(uploaded_file.read())
-
         first_page=images[0]
-
         img_byte_arr = io.BytesIO()
         first_page.save(img_byte_arr,format='JPEG')
         img_byte_arr=img_byte_arr.getvalue()
-
         pdf_parts = [
             {
                 "mime_type": "image/jpeg",
@@ -35,7 +30,6 @@ def input_pdf_text(uploaded_file):
             }
         ]
         return pdf_parts
-
     else:
         raise FileNotFoundError("No file uploaded")
 
@@ -68,7 +62,6 @@ you are a skilled ATS(APPLICANT TRACKING SYSTEM) scanner with deep understanding
 Big data engineer,Frontend Developer, Backend Developer and ATS functionality.your task is to evaluate the resume against the rpovided job description. give me the 
 percentage match for the provided job description. first the ouptut should come as percentage and the keywords missing and last final thoughts
 """
-
 
 input_prompt = """You are an experienced HR with Tech Experience in the field of 
 data science, Data analysis, Software Engineer, Full stack developer, Web developer,
@@ -115,7 +108,6 @@ if submit2:
         st.write("Please upload the Resume")
 
 import subprocess
-
 try:
     result = subprocess.run(["pdfinfo", "-v"], capture_output=True, text=True, check=True)
     print(result.stdout)
